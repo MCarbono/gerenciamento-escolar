@@ -11,6 +11,7 @@ class Nivel extends Model
     protected $fillable = ['nome'];
 
     //relacionamentos
+    public $timestamps = false;
     
     public function usuarios() {
         return $this->hasMany('App\Usuario');

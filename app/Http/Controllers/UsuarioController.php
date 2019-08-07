@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\{Nivel, Usuario};
+use App\Http\Requests\{UsuarioStoreRequest};
 
 class UsuarioController extends Controller
 {
     public function index() {
 
         $usuarios = Usuario::all();
+        $usuariosDeletados = Usuario::onlyTrashed()->get();
 
-        return view('index', compact('usuarios'));
+        return view('index', compact('usuarios', 'usuariosDeletados'));
     }
 
     public function create() {
@@ -21,7 +23,7 @@ class UsuarioController extends Controller
         return view('form', compact('niveis'));
     }
 
-    public function store(Request $request) {
+    public function store(UsuarioStoreRequest $request) {
         
         /*$usuario = Usuario::create([
             'nome' => $request->nome,
@@ -44,11 +46,22 @@ class UsuarioController extends Controller
         return view('/form', compact('usuario', 'niveis'));
     }
 
-    public function update(Request $request, $id){
+    public function update(UsuarioStoreRequest $request, $id){
         $usuario = Usuario::findOrFail($id);
         $usuario->update($request->all());
         return redirect('/');
     }
 
+    public function destroy($id){
+        $usuario = Usuario::findOrFail($id);
+        $usuario->delete();
+        return back();
+    }
+
+    public function restore($id){
+        $usuario = Usuario::onlyTrashed()->findOrFail($id);
+        $usuario->restore();
+        return back();
+    }
     
 }

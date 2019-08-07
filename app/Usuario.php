@@ -2,10 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class Usuario extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = 'usuario';
 
     protected $fillable = ['email', 'nome', 'data_nascimento', 'nivel_id'];

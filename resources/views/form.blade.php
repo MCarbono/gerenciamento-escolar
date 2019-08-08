@@ -12,6 +12,15 @@
     <br>
 @endforeach -->
 
+    @if(Session::has('success'))
+        <p>{{Session::get('success')}}</p>
+    @endif
+
+    @if(Session::has('error'))
+        <p>{{Session::get('error')}}</p>
+    @endif
+
+
     <form method="POST" action="{{url((isset($usuario) ? $usuario->id : ''))}}">
 
         @csrf
@@ -36,7 +45,14 @@
         <br>
         {{$errors->first('data_nascimento')}}
         <br><br>
-
+        <label for="materias[]">Materia</label><br>
+        <select name="materias[]" multiple>
+            @foreach($materias as $materia)
+                <option {{isset($usuario) && $usuario->materia->id == $materia->id ? 'selected' : ''}} value="{{$materia->id}}">{{$materia->nome}}</option>
+            @endforeach
+        </select>
+        <br><br>
+        <label for="nivel_id">Nível</label><br>
         <select name="nivel_id">
             @foreach($niveis as $nivel)
                 <option {{isset($usuario) && $usuario->nivel->id == $nivel->id ? 'selected' : ''}} value="{{$nivel->id}}">{{$nivel->nome}}</option>

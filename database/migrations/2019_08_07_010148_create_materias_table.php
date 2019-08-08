@@ -14,9 +14,8 @@ class CreateMateriasTable extends Migration
     public function up()
     {
         Schema::create('materia', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('nome');
-            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateMateriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materia');
+        Schema::drop('materia');
     }
 }

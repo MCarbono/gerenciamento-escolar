@@ -25,7 +25,7 @@ class UsuarioStoreRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'min:3', 'max:50'],
-            'email' => ['required', 'email', 'unique:usuario,email'.$this->route('id')],
+            'email' => ['required', 'email', 'unique:usuario,email,'.$this->route('id')],
             'data_nascimento' => ['required'],
             'nivel_id' => ['required']
         ];

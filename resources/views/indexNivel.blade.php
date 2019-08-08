@@ -17,5 +17,9 @@
             <tr>
         @endforeach
     </table>
+    
+<br>
+<button><a href="/nivel/form">Adicionar Nível</a></button>
+
 </body>
 </html>
